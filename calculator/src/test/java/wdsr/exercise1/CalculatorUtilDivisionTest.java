@@ -1,13 +1,9 @@
 package wdsr.exercise1;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 
@@ -28,9 +24,14 @@ public class CalculatorUtilDivisionTest {
 	}
 	
 	@Test
-	public void test16dividedBy4() {
-		fail("Not yet implemented");
-	}		
+	public void test16dividedBy4() 
+	{
+		double Value = 20d/5d;
+		when(calculator.divide(anyInt(), anyInt())).thenReturn(Value);
+		String result = calcUtil.getDivisionText(20, 5);
+		assertEquals("20 / 5 = "+Value, result);
+		verify(calculator).divide(anyInt(), anyInt());
+	}
 
 	@Test(expected=IllegalArgumentException.class)
 	public void testDivisionByZero() {
